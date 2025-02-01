@@ -14,7 +14,7 @@
             <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
             <a href="#symptom-checker"><i class="fas fa-stethoscope"></i> Symptom Checker</a>
             <a href="#bmi-calculator"><i class="fas fa-calculator"></i> BMI Calculator</a>
-            <a href="#medication-tracker"><i class="fas fa-pills"></i> Medication Tracker</a>
+            <a href="#lifestyle-diseases"><i class="fas fa-heartbeat"></i> Lifestyle Diseases</a>
             <a href="#first-aid-guide"><i class="fas fa-kit-medical"></i> First Aid</a>
             <a href="#health-tips"><i class="fas fa-lightbulb"></i> Health Tips</a>
         </div>
@@ -38,10 +38,10 @@
                     <h3>BMI Calculator</h3>
                     <p>Calculate and track your BMI</p>
                 </div>
-                <div class="feature-card" onclick="navigateTo('medication-tracker')">
-                    <i class="fas fa-pills"></i>
-                    <h3>Medication Tracker</h3>
-                    <p>Never miss your medications</p>
+                <div class="feature-card" onclick="navigateTo('lifestyle-diseases')">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Lifestyle Diseases</h3>
+                    <p>Manage and prevent lifestyle diseases</p>
                 </div>
                 <div class="feature-card" onclick="navigateTo('health-tips')">
                     <i class="fas fa-lightbulb"></i>
@@ -90,17 +90,735 @@
             </div>
         </section>
 
-        <!-- Medication Tracker Section -->
-        <section id="medication-tracker" class="section">
-            <h2>Medication Tracker</h2>
-            <div class="medication-container">
-                <div class="add-medication">
-                    <input type="text" id="med-name" placeholder="Medication name">
-                    <input type="time" id="med-time">
-                    <button onclick="addMedication()" class="add-btn">Add Medication</button>
+        <!-- Lifestyle Diseases Section -->
+        <section id="lifestyle-diseases" class="section">
+            <h2>Lifestyle Diseases Guide</h2>
+            <div class="lifestyle-diseases-container">
+                <div class="search-box">
+                    <input type="text" id="diseaseSearch" placeholder="Search diseases...">
+                    <i class="fas fa-search"></i>
                 </div>
-                <div id="medications-list" class="medications-list">
-                    <!-- Medications will be listed here -->
+                
+                <div class="lifestyle-accordion">
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-syringe"></i> Diabetes Mellitus</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Frequent urination, excessive thirst, unexplained weight loss, fatigue</p>
+                            <div class="treatment-section">
+                                <h4>Home Treatment & Management:</h4>
+                                <ul>
+                                    <li>Monitor blood sugar levels regularly</li>
+                                    <li>Follow a balanced, low-glycemic diet</li>
+                                    <li>Exercise for 30 minutes daily</li>
+                                    <li>Maintain a healthy weight</li>
+                                    <li>Take prescribed medications regularly</li>
+                                    <li>Check feet daily for wounds or infections</li>
+                                    <li>Stay hydrated with water</li>
+                                    <li>Get adequate sleep (7-8 hours)</li>
+                                    <li>Manage stress through relaxation techniques</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-heart"></i> Hypertension</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Often asymptomatic, occasional headaches, shortness of breath, nosebleeds</p>
+                            <div class="treatment-section">
+                                <h4>Home Treatment & Management:</h4>
+                                <ul>
+                                    <li>Reduce sodium intake (< 2300mg daily)</li>
+                                    <li>Follow DASH diet rich in fruits and vegetables</li>
+                                    <li>Regular aerobic exercise</li>
+                                    <li>Limit alcohol consumption</li>
+                                    <li>Practice stress management</li>
+                                    <li>Monitor blood pressure regularly</li>
+                                    <li>Maintain healthy weight</li>
+                                    <li>Quit smoking</li>
+                                    <li>Get adequate sleep</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Continue with other diseases following the same format -->
+                    <!-- I'll add a few more key ones, then you can let me know if you want me to continue with the rest -->
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-lungs"></i> Asthma</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Wheezing, shortness of breath, chest tightness, coughing</p>
+                            <div class="treatment-section">
+                                <h4>Home Treatment & Management:</h4>
+                                <ul>
+                                    <li>Identify and avoid triggers</li>
+                                    <li>Use air purifiers at home</li>
+                                    <li>Practice breathing exercises</li>
+                                    <li>Keep rescue inhaler handy</li>
+                                    <li>Follow asthma action plan</li>
+                                    <li>Regular exercise in clean air</li>
+                                    <li>Maintain clean, dust-free environment</li>
+                                    <li>Stay up to date with vaccinations</li>
+                                    <li>Monitor peak flow readings</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-lungs-virus"></i> COPD</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Progressive shortness of breath, chronic cough, mucus production</p>
+                            <div class="treatment-section">
+                                <h4>Home Treatment & Management:</h4>
+                                <ul>
+                                    <li>Quit smoking immediately</li>
+                                    <li>Practice pursed-lip breathing</li>
+                                    <li>Use humidifiers</li>
+                                    <li>Regular pulmonary rehabilitation exercises</li>
+                                    <li>Avoid air pollutants</li>
+                                    <li>Get vaccinated against flu and pneumonia</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Maintain good nutrition</li>
+                                    <li>Practice energy conservation techniques</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-brain"></i> Alzheimer's Disease</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Progressive memory loss, confusion, difficulty with familiar tasks, personality changes</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Establish daily routines</li>
+                                    <li>Create a safe and structured environment</li>
+                                    <li>Use memory aids (notes, calendars)</li>
+                                    <li>Engage in cognitive stimulation activities</li>
+                                    <li>Maintain social connections</li>
+                                    <li>Ensure proper nutrition</li>
+                                    <li>Regular physical exercise</li>
+                                    <li>Monitor medication schedule</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-hand-dots"></i> Parkinson's Disease</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Tremors, slow movement, stiffness, balance problems</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Regular exercise and physical therapy</li>
+                                    <li>Speech therapy exercises</li>
+                                    <li>Occupational therapy</li>
+                                    <li>Maintain a balanced diet</li>
+                                    <li>Use assistive devices when needed</li>
+                                    <li>Create a safe home environment</li>
+                                    <li>Join support groups</li>
+                                    <li>Regular medical check-ups</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-brain"></i> Multiple Sclerosis</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Fatigue, vision problems, numbness, difficulty walking</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Regular exercise within limits</li>
+                                    <li>Stress management techniques</li>
+                                    <li>Heat management strategies</li>
+                                    <li>Energy conservation techniques</li>
+                                    <li>Maintain a healthy diet</li>
+                                    <li>Get adequate rest</li>
+                                    <li>Join support groups</li>
+                                    <li>Regular medical monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-weight"></i> Obesity</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> BMI over 30, excess body fat, difficulty with physical activities</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Create a calorie deficit diet plan</li>
+                                    <li>Regular physical exercise</li>
+                                    <li>Keep food and activity journal</li>
+                                    <li>Practice portion control</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Get adequate sleep</li>
+                                    <li>Join support groups</li>
+                                    <li>Regular health monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-head-side-virus"></i> Migraine</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Severe headache, sensitivity to light and sound, nausea, visual disturbances</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Identify and avoid triggers</li>
+                                    <li>Maintain regular sleep schedule</li>
+                                    <li>Practice stress management</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Rest in a dark, quiet room</li>
+                                    <li>Use cold/hot compresses</li>
+                                    <li>Keep a migraine diary</li>
+                                    <li>Regular exercise</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-virus"></i> HIV/AIDS</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Weakened immune system, frequent infections, fatigue, weight loss</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Take medications as prescribed</li>
+                                    <li>Maintain proper nutrition</li>
+                                    <li>Practice safe sex</li>
+                                    <li>Regular exercise</li>
+                                    <li>Get adequate rest</li>
+                                    <li>Avoid exposure to infections</li>
+                                    <li>Regular medical check-ups</li>
+                                    <li>Join support groups</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-lungs-virus"></i> Tuberculosis</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Persistent cough, chest pain, weight loss, night sweats, fatigue</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Complete full course of prescribed medications</li>
+                                    <li>Wear mask when around others</li>
+                                    <li>Ensure good ventilation</li>
+                                    <li>Get adequate rest</li>
+                                    <li>Eat nutritious meals</li>
+                                    <li>Avoid alcohol and smoking</li>
+                                    <li>Regular medical follow-up</li>
+                                    <li>Monitor symptoms closely</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-virus"></i> Hepatitis</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Fatigue, jaundice, abdominal pain, loss of appetite, nausea</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Rest adequately</li>
+                                    <li>Avoid alcohol completely</li>
+                                    <li>Eat a balanced, healthy diet</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Practice good hygiene</li>
+                                    <li>Avoid sharing personal items</li>
+                                    <li>Regular medical monitoring</li>
+                                    <li>Get vaccinated (for A and B)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-brain"></i> Depression</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Persistent sadness, loss of interest, sleep changes, fatigue, difficulty concentrating</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Maintain regular sleep schedule</li>
+                                    <li>Exercise regularly</li>
+                                    <li>Practice mindfulness/meditation</li>
+                                    <li>Stay connected with others</li>
+                                    <li>Set realistic daily goals</li>
+                                    <li>Eat a balanced diet</li>
+                                    <li>Avoid alcohol and drugs</li>
+                                    <li>Seek professional help when needed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-brain"></i> Anxiety Disorders</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Excessive worry, restlessness, difficulty concentrating, sleep problems</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Practice deep breathing exercises</li>
+                                    <li>Regular physical exercise</li>
+                                    <li>Maintain sleep routine</li>
+                                    <li>Limit caffeine and alcohol</li>
+                                    <li>Use relaxation techniques</li>
+                                    <li>Join support groups</li>
+                                    <li>Keep anxiety journal</li>
+                                    <li>Practice stress management</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-heart"></i> Heart Disease</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Chest pain, shortness of breath, fatigue, irregular heartbeat</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Follow a heart-healthy diet</li>
+                                    <li>Regular moderate exercise</li>
+                                    <li>Monitor blood pressure</li>
+                                    <li>Maintain healthy weight</li>
+                                    <li>Quit smoking</li>
+                                    <li>Limit alcohol intake</li>
+                                    <li>Manage stress levels</li>
+                                    <li>Take prescribed medications</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-brain"></i> Stroke</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Sudden numbness, confusion, difficulty speaking, vision problems, severe headache</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Follow rehabilitation exercises</li>
+                                    <li>Modify home for safety</li>
+                                    <li>Practice speech therapy exercises</li>
+                                    <li>Maintain healthy diet</li>
+                                    <li>Control blood pressure</li>
+                                    <li>Regular physical therapy</li>
+                                    <li>Join support groups</li>
+                                    <li>Regular medical check-ups</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-bone"></i> Arthritis</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Joint pain, stiffness, swelling, reduced range of motion</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Regular gentle exercise</li>
+                                    <li>Apply hot/cold therapy</li>
+                                    <li>Maintain healthy weight</li>
+                                    <li>Use assistive devices</li>
+                                    <li>Practice joint protection</li>
+                                    <li>Gentle stretching exercises</li>
+                                    <li>Anti-inflammatory diet</li>
+                                    <li>Stress management</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-disease"></i> Cancer</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Varies by type - unexplained weight loss, fatigue, pain, unusual bleeding</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Follow treatment plan strictly</li>
+                                    <li>Maintain proper nutrition</li>
+                                    <li>Get adequate rest</li>
+                                    <li>Exercise as tolerated</li>
+                                    <li>Manage side effects</li>
+                                    <li>Join support groups</li>
+                                    <li>Practice stress reduction</li>
+                                    <li>Regular medical monitoring</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-virus"></i> Influenza (Flu)</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Fever, body aches, fatigue, cough, sore throat</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Get plenty of rest</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Take over-the-counter medications</li>
+                                    <li>Use humidifier</li>
+                                    <li>Practice good hygiene</li>
+                                    <li>Monitor temperature</li>
+                                    <li>Eat light, nutritious foods</li>
+                                    <li>Avoid spreading to others</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-lungs-virus"></i> Pneumonia</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Cough with phlegm, fever, difficulty breathing, chest pain</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Complete prescribed antibiotics</li>
+                                    <li>Get plenty of rest</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Use humidifier</li>
+                                    <li>Practice deep breathing</li>
+                                    <li>Monitor temperature</li>
+                                    <li>Avoid smoking</li>
+                                    <li>Follow up with doctor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-stomach"></i> GERD</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Heartburn, regurgitation, chest pain, difficulty swallowing</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Avoid trigger foods</li>
+                                    <li>Eat smaller meals</li>
+                                    <li>Don't lie down after eating</li>
+                                    <li>Elevate head while sleeping</li>
+                                    <li>Maintain healthy weight</li>
+                                    <li>Avoid tight clothing</li>
+                                    <li>Quit smoking</li>
+                                    <li>Stress management</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-wheat"></i> Celiac Disease</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Digestive issues, fatigue, weight loss, skin rash</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Follow strict gluten-free diet</li>
+                                    <li>Read food labels carefully</li>
+                                    <li>Avoid cross-contamination</li>
+                                    <li>Take prescribed supplements</li>
+                                    <li>Monitor nutritional status</li>
+                                    <li>Join support groups</li>
+                                    <li>Regular medical check-ups</li>
+                                    <li>Keep food diary</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-kidneys"></i> Kidney Disease</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Fatigue, swelling, changes in urination, high blood pressure</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Follow renal diet</li>
+                                    <li>Monitor fluid intake</li>
+                                    <li>Control blood pressure</li>
+                                    <li>Regular exercise</li>
+                                    <li>Take medications as prescribed</li>
+                                    <li>Monitor weight daily</li>
+                                    <li>Avoid nephrotoxic substances</li>
+                                    <li>Regular medical check-ups</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-bacterium"></i> UTI</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Frequent urination, burning sensation, cloudy urine, pelvic pain</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Complete prescribed antibiotics</li>
+                                    <li>Drink plenty of water</li>
+                                    <li>Urinate frequently</li>
+                                    <li>Use heating pad</li>
+                                    <li>Practice good hygiene</li>
+                                    <li>Avoid irritating products</li>
+                                    <li>Wear cotton underwear</li>
+                                    <li>Take probiotics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-user-nurse"></i> Thyroid Disorders</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Weight changes, fatigue, mood changes, temperature sensitivity</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Take medications as prescribed</li>
+                                    <li>Monitor symptoms</li>
+                                    <li>Maintain healthy diet</li>
+                                    <li>Regular exercise</li>
+                                    <li>Get adequate sleep</li>
+                                    <li>Manage stress</li>
+                                    <li>Regular blood tests</li>
+                                    <li>Avoid iodine-rich foods if needed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-virus"></i> Chickenpox</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Itchy rash, fever, fatigue, loss of appetite</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Rest and isolate</li>
+                                    <li>Use calamine lotion</li>
+                                    <li>Take oatmeal baths</li>
+                                    <li>Avoid scratching</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Wear loose clothing</li>
+                                    <li>Monitor temperature</li>
+                                    <li>Use antihistamines if needed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-virus"></i> Measles</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Rash, high fever, cough, runny nose, red eyes</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Rest and isolate</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Use humidifier</li>
+                                    <li>Monitor temperature</li>
+                                    <li>Dim lights for eye comfort</li>
+                                    <li>Take vitamin A if prescribed</li>
+                                    <li>Maintain good hygiene</li>
+                                    <li>Follow up with doctor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-virus"></i> Mumps</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Swollen salivary glands, fever, headache, muscle aches</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Rest and isolate</li>
+                                    <li>Apply cold compresses</li>
+                                    <li>Eat soft foods</li>
+                                    <li>Stay hydrated</li>
+                                    <li>Take pain relievers</li>
+                                    <li>Avoid acidic foods</li>
+                                    <li>Monitor temperature</li>
+                                    <li>Practice good hygiene</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-allergies"></i> Eczema</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Dry, itchy skin, redness, inflammation, rough patches</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Moisturize regularly</li>
+                                    <li>Identify and avoid triggers</li>
+                                    <li>Use gentle skincare products</li>
+                                    <li>Take lukewarm baths</li>
+                                    <li>Wear soft, breathable clothing</li>
+                                    <li>Manage stress</li>
+                                    <li>Use prescribed medications</li>
+                                    <li>Keep nails trimmed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-allergies"></i> Psoriasis</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Red, scaly patches, itching, burning, joint pain</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Use prescribed topical treatments</li>
+                                    <li>Take regular baths</li>
+                                    <li>Moisturize frequently</li>
+                                    <li>Get sunlight exposure</li>
+                                    <li>Avoid triggers</li>
+                                    <li>Manage stress</li>
+                                    <li>Maintain healthy weight</li>
+                                    <li>Join support groups</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lifestyle-item">
+                        <div class="lifestyle-header" onclick="toggleLifestyle(this)">
+                            <h3><i class="fas fa-tint"></i> Anaemia</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="lifestyle-content">
+                            <p><strong>Key Symptoms:</strong> Fatigue, weakness, pale skin, shortness of breath, dizziness, cold hands and feet</p>
+                            <div class="treatment-section">
+                                <h4>Home Management:</h4>
+                                <ul>
+                                    <li>Eat iron-rich foods (lean meat, leafy greens, beans)</li>
+                                    <li>Include vitamin C to enhance iron absorption</li>
+                                    <li>Take prescribed iron supplements</li>
+                                    <li>Avoid tea/coffee with meals</li>
+                                    <li>Get adequate rest</li>
+                                    <li>Exercise moderately as tolerated</li>
+                                    <li>Regular blood tests as recommended</li>
+                                    <li>Maintain a balanced diet</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

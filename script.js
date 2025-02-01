@@ -324,51 +324,6 @@ function calculateBMI() {
     `;
 }
 
-// Medication Tracker
-const medications = [];
-
-function addMedication() {
-    const name = document.getElementById('med-name').value.trim();
-    const time = document.getElementById('med-time').value;
-    
-    if (!name || !time) {
-        alert('Please enter both medication name and time');
-        return;
-    }
-
-    medications.push({ name, time });
-    updateMedicationsList();
-    
-    // Clear inputs
-    document.getElementById('med-name').value = '';
-    document.getElementById('med-time').value = '';
-}
-
-function updateMedicationsList() {
-    const list = document.getElementById('medications-list');
-    list.innerHTML = '';
-    
-    medications.sort((a, b) => a.time.localeCompare(b.time)).forEach((med, index) => {
-        const item = document.createElement('div');
-        item.className = 'medication-item';
-        item.innerHTML = `
-            <div>
-                <strong>${med.name}</strong>
-                <span>${med.time}</span>
-            </div>
-            <button onclick="deleteMedication(${index})" class="delete-btn">
-                <i class="fas fa-trash"></i>
-            </button>
-        `;
-        list.appendChild(item);
-    });
-}
-
-function deleteMedication(index) {
-    medications.splice(index, 1);
-    updateMedicationsList();
-}
-
 // Health Tips
 const healthTips = [
     "Stay hydrated by drinking at least 8 glasses of water daily",
@@ -502,6 +457,47 @@ document.getElementById('firstAidSearch').addEventListener('input', function(e) 
     firstAidItems.forEach(item => {
         const headerText = item.querySelector('.first-aid-header h3').textContent.toLowerCase();
         const contentText = item.querySelector('.first-aid-content').textContent.toLowerCase();
+        
+        if (headerText.includes(searchTerm) || contentText.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
+
+// Remove medication tracker functions
+function toggleLifestyle(header) {
+    const content = header.nextElementSibling;
+    const icon = header.querySelector('.fa-chevron-down');
+    
+    // Close all other open sections
+    document.querySelectorAll('.lifestyle-content').forEach(item => {
+        if (item !== content && item.classList.contains('active')) {
+            item.classList.remove('active');
+            item.previousElementSibling.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+        }
+    });
+
+    // Toggle current section
+    content.classList.toggle('active');
+    
+    // Rotate icon
+    if (content.classList.contains('active')) {
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Search functionality for lifestyle diseases
+document.getElementById('diseaseSearch').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const diseaseItems = document.querySelectorAll('.lifestyle-item');
+
+    diseaseItems.forEach(item => {
+        const headerText = item.querySelector('.lifestyle-header h3').textContent.toLowerCase();
+        const contentText = item.querySelector('.lifestyle-content').textContent.toLowerCase();
         
         if (headerText.includes(searchTerm) || contentText.includes(searchTerm)) {
             item.style.display = 'block';

@@ -799,4 +799,101 @@ body {
 .first-aid-content .warning-box i {
     color: var(--color-accent);
     font-size: 1.1rem;
+}
+
+.lifestyle-diseases-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.lifestyle-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lifestyle-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    transition: box-shadow 0.3s ease;
+}
+
+.lifestyle-item:hover {
+    box-shadow: var(--shadow);
+}
+
+.lifestyle-header {
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    transition: background-color 0.3s ease;
+}
+
+.lifestyle-header:hover {
+    background-color: var(--color-background);
+}
+
+.lifestyle-header h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lifestyle-header h3 i {
+    color: var(--color-primary);
+}
+
+.lifestyle-content {
+    display: none;
+    padding: 20px;
+    background-color: var(--color-background);
+    border-top: 1px solid #e0e0e0;
+}
+
+.lifestyle-content.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+}
+
+.treatment-section {
+    margin-top: 15px;
+}
+
+.treatment-section h4 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.treatment-section ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.treatment-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+    .lifestyle-diseases-container {
+        padding: 15px;
+    }
+
+    .lifestyle-header h3 {
+        font-size: 1rem;
+    }
 } 
