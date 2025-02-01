@@ -15,6 +15,7 @@
             <a href="#symptom-checker"><i class="fas fa-stethoscope"></i> Symptom Checker</a>
             <a href="#bmi-calculator"><i class="fas fa-calculator"></i> BMI Calculator</a>
             <a href="#medication-tracker"><i class="fas fa-pills"></i> Medication Tracker</a>
+            <a href="#first-aid-guide"><i class="fas fa-kit-medical"></i> First Aid</a>
             <a href="#health-tips"><i class="fas fa-lightbulb"></i> Health Tips</a>
         </div>
     </nav>
@@ -111,6 +112,166 @@
                 </div>
                 <div class="tips-grid" id="tips-grid">
                     <!-- More health tips will be displayed here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- First Aid Guide Section -->
+        <section id="first-aid-guide" class="section">
+            <h2>First Aid Guide</h2>
+            <div class="first-aid-guide-container">
+                <div class="search-box">
+                    <input type="text" id="firstAidSearch" placeholder="Search first aid topics...">
+                    <i class="fas fa-search"></i>
+                </div>
+                
+                <div class="first-aid-accordion">
+                    <!-- Principles and Practices -->
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-book-medical"></i> Principles and Practices of First Aid</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <div class="subsection">
+                                <h4>Key Messages</h4>
+                                <ul>
+                                    <li>First aid preserves life, prevents deterioration, and promotes recovery</li>
+                                    <li>It is a vital skill requiring training</li>
+                                    <li>Golden rules: Ensure safety first and perform tasks in a logical order</li>
+                                </ul>
+                            </div>
+                            <div class="subsection">
+                                <h4>Golden Rules of First Aid</h4>
+                                <ol>
+                                    <li>Assess the situation for danger before acting</li>
+                                    <li>Remove the victim from the cause of injury, if possible</li>
+                                    <li>Resuscitate if necessary</li>
+                                    <li>Loosen tight clothing</li>
+                                    <li>Control bleeding and cover wounds</li>
+                                    <li>Avoid unnecessary movement unless required</li>
+                                    <li>Provide reassurance and seek help</li>
+                                    <li>Improvise with available materials</li>
+                                    <li>Treat for shock</li>
+                                    <li>Transport the victim safely</li>
+                                    <li>Stay with the victim until professional help arrives</li>
+                                    <li>Keep emergency contacts handy for quick access</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assessment in First Aid -->
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-clipboard-check"></i> Assessment in First Aid</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <div class="subsection">
+                                <h4>Key Steps</h4>
+                                <ol>
+                                    <li><strong>Primary & Secondary Survey:</strong> Check airway, breathing, and circulation</li>
+                                    <li><strong>Diagnosis:</strong> Assess signs, symptoms, and history</li>
+                                    <li><strong>Scene Safety:</strong> Ensure a safe environment before providing care</li>
+                                    <li><strong>Assessing Responsiveness:</strong> Check for consciousness by gently shaking the person and calling out</li>
+                                    <li><strong>Check for Medical Identification:</strong> Look for medical bracelets or cards indicating pre-existing conditions</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Body Structure -->
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-user-injured"></i> Structure and Function of Essential Body Parts</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <div class="subsection">
+                                <h4>Key Points</h4>
+                                <ul>
+                                    <li><strong>Skull:</strong> Protects the brain</li>
+                                    <li><strong>Spine:</strong> Houses the spinal cord; crucial in movement</li>
+                                    <li><strong>Ribs & Breastbone:</strong> Protect the heart and lungs</li>
+                                    <li><strong>Lungs:</strong> Assist in oxygen intake and carbon dioxide expulsion</li>
+                                    <li><strong>Heart:</strong> Pumps oxygenated blood to the body</li>
+                                    <li><strong>Abdomen:</strong> Contains vital organs such as the liver, kidneys, and intestines</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Basic Life Support -->
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-heartbeat"></i> Basic Life Support (Resuscitation)</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <div class="subsection">
+                                <h4>Key Steps for CPR</h4>
+                                <ol>
+                                    <li>Check Responsiveness – Shake the person and call out</li>
+                                    <li>Perform Chest Compressions – At least 2 inches deep at a rate of 100-120 per minute</li>
+                                    <li>Give Rescue Breaths – Two breaths after every 30 compressions</li>
+                                    <li>Repeat until Medical Help Arrives</li>
+                                    <li>Use an Automated External Defibrillator (AED) if available and follow voice instructions</li>
+                                </ol>
+                            </div>
+                            <div class="subsection">
+                                <h4>Heimlich Maneuver (Choking First Aid)</h4>
+                                <ol>
+                                    <li>Stand behind the choking person</li>
+                                    <li>Wrap arms around their waist</li>
+                                    <li>Make a fist and place it above their navel</li>
+                                    <li>Grasp the fist with your other hand and thrust sharply inward and upward</li>
+                                    <li>Repeat until the object is expelled</li>
+                                    <li>If the person is unconscious, begin CPR immediately</li>
+                                    <li>Encourage small sips of water if the person is able to breathe but still feels discomfort</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency First Aid -->
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-first-aid"></i> First Aid in Emergencies</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <div class="subsection">
+                                <h4>Burns</h4>
+                                <ol>
+                                <h4>Signs & Symptoms:</h4>
+                                <ul>
+                                    <li>Burns at contact points</li>
+                                    <li>Muscle pain and contractions</li>
+                                    <li>Difficulty breathing</li>
+                                    <li>Irregular heartbeat</li>
+                                    <li>Seizures or unconsciousness</li>
+                                </ul>
+                            </div>
+                            <div class="subsection">
+                                <h4>Treatment Steps:</h4>
+                                <ol>
+                                    <li>Ensure scene is safe</li>
+                                    <li>Turn off power source if possible</li>
+                                    <li>Check breathing and pulse</li>
+                                    <li>Begin CPR if necessary</li>
+                                    <li>Cool any burns with clean water</li>
+                                    <li>Seek immediate medical attention</li>
+                                </ol>
+                            </div>
+                            <div class="warning-box">
+                                <p><i class="fas fa-exclamation-triangle"></i> Never touch the person while they are still in contact with the electrical source</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add more first aid items here -->
+
                 </div>
             </div>
         </section>

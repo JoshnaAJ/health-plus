@@ -216,11 +216,67 @@ function updateDailyTip() {
     `;
 }
 
+// First Aid Guide Functionality
+function toggleFirstAid(header) {
+    const content = header.nextElementSibling;
+    const icon = header.querySelector('.fa-chevron-down');
+    
+    // Close all other open sections
+    document.querySelectorAll('.first-aid-content').forEach(item => {
+        if (item !== content && item.classList.contains('active')) {
+            item.classList.remove('active');
+            item.previousElementSibling.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+        }
+    });
+
+    // Toggle current section
+    content.classList.toggle('active');
+    
+    // Rotate icon
+    if (content.classList.contains('active')) {
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Add First Aid card to home page
+function addFirstAidCard() {
+    const featuresGrid = document.querySelector('.features-grid');
+    const firstAidCard = document.createElement('div');
+    firstAidCard.className = 'feature-card';
+    firstAidCard.onclick = () => navigateTo('first-aid-guide');
+    firstAidCard.innerHTML = `
+        <i class="fas fa-kit-medical"></i>
+        <h3>First Aid Guide</h3>
+        <p>Quick access to emergency first aid procedures</p>
+    `;
+    featuresGrid.appendChild(firstAidCard);
+}
+
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
     navigateTo('home');
     updateDailyTip();
+    addFirstAidCard();
     
     // Update tip every 24 hours
     setInterval(updateDailyTip, 24 * 60 * 60 * 1000);
+});
+
+// Search functionality for first aid topics
+document.getElementById('firstAidSearch').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const firstAidItems = document.querySelectorAll('.first-aid-item');
+
+    firstAidItems.forEach(item => {
+        const headerText = item.querySelector('.first-aid-header h3').textContent.toLowerCase();
+        const contentText = item.querySelector('.first-aid-content').textContent.toLowerCase();
+        
+        if (headerText.includes(searchTerm) || contentText.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
 }); 
