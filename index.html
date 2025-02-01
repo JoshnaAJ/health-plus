@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthPlus Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">HealthPlus</div>
+        <div class="nav-links">
+            <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+            <a href="#symptom-checker"><i class="fas fa-stethoscope"></i> Symptom Checker</a>
+            <a href="#bmi-calculator"><i class="fas fa-calculator"></i> BMI Calculator</a>
+            <a href="#medication-tracker"><i class="fas fa-pills"></i> Medication Tracker</a>
+            <a href="#health-tips"><i class="fas fa-lightbulb"></i> Health Tips</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <h1>Welcome to HealthPlus</h1>
+            <p>Your personal healthcare assistant powered by AI</p>
+            <div class="features-grid">
+                <div class="feature-card" onclick="navigateTo('symptom-checker')">
+                    <i class="fas fa-stethoscope"></i>
+                    <h3>Symptom Checker</h3>
+                    <p>Get AI-powered analysis of your symptoms</p>
+                </div>
+                <div class="feature-card" onclick="navigateTo('bmi-calculator')">
+                    <i class="fas fa-calculator"></i>
+                    <h3>BMI Calculator</h3>
+                    <p>Calculate and track your BMI</p>
+                </div>
+                <div class="feature-card" onclick="navigateTo('medication-tracker')">
+                    <i class="fas fa-pills"></i>
+                    <h3>Medication Tracker</h3>
+                    <p>Never miss your medications</p>
+                </div>
+                <div class="feature-card" onclick="navigateTo('health-tips')">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Health Tips</h3>
+                    <p>Daily health advice and tips</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Symptom Checker Section -->
+        <section id="symptom-checker" class="section">
+            <h2>AI Symptom Checker</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Messages will be displayed here -->
+                    <div class="message bot-message">
+                        Hello! I'm your personal health assistant. Please describe your symptoms in detail, and I'll help you understand what might be causing them and suggest possible remedies.
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <textarea id="user-input" placeholder="Describe your symptoms here..." rows="1"></textarea>
+                    <button id="send-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BMI Calculator Section -->
+        <section id="bmi-calculator" class="section">
+            <h2>BMI Calculator</h2>
+            <div class="calculator-container">
+                <div class="input-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="Enter weight">
+                </div>
+                <div class="input-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" placeholder="Enter height">
+                </div>
+                <button onclick="calculateBMI()" class="calculate-btn">Calculate BMI</button>
+                <div id="bmi-result" class="result-container"></div>
+            </div>
+        </section>
+
+        <!-- Medication Tracker Section -->
+        <section id="medication-tracker" class="section">
+            <h2>Medication Tracker</h2>
+            <div class="medication-container">
+                <div class="add-medication">
+                    <input type="text" id="med-name" placeholder="Medication name">
+                    <input type="time" id="med-time">
+                    <button onclick="addMedication()" class="add-btn">Add Medication</button>
+                </div>
+                <div id="medications-list" class="medications-list">
+                    <!-- Medications will be listed here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Health Tips Section -->
+        <section id="health-tips" class="section">
+            <h2>Daily Health Tips</h2>
+            <div class="tips-container">
+                <div id="daily-tip" class="tip-card">
+                    <!-- Daily tip will be displayed here -->
+                </div>
+                <div class="tips-grid" id="tips-grid">
+                    <!-- More health tips will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
