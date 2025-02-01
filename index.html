@@ -23,6 +23,8 @@
     <div class="container">
         <!-- Home Section -->
         <section id="home" class="section active">
+            <div id="fitness-quote-section"></div>
+            <div id="daily-tip"></div>
             <h1>Welcome to HealthPlus</h1>
             <p>Your personal healthcare assistant powered by AI</p>
             <div class="features-grid">
@@ -126,10 +128,10 @@
                 </div>
                 
                 <div class="first-aid-accordion">
-                    <!-- Principles and Practices -->
+                    <!-- 1. Principles and Practices -->
                     <div class="first-aid-item">
                         <div class="first-aid-header" onclick="toggleFirstAid(this)">
-                            <h3><i class="fas fa-book-medical"></i> Principles and Practices of First Aid</h3>
+                            <h3><i class="fas fa-book-medical"></i> 1. Principles and Practices of First Aid</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="first-aid-content">
@@ -161,10 +163,10 @@
                         </div>
                     </div>
 
-                    <!-- Assessment in First Aid -->
+                    <!-- 2. Assessment -->
                     <div class="first-aid-item">
                         <div class="first-aid-header" onclick="toggleFirstAid(this)">
-                            <h3><i class="fas fa-clipboard-check"></i> Assessment in First Aid</h3>
+                            <h3><i class="fas fa-clipboard-check"></i> 2. Assessment in First Aid</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="first-aid-content">
@@ -181,10 +183,10 @@
                         </div>
                     </div>
 
-                    <!-- Body Structure -->
+                    <!-- 3. Body Structure -->
                     <div class="first-aid-item">
                         <div class="first-aid-header" onclick="toggleFirstAid(this)">
-                            <h3><i class="fas fa-user-injured"></i> Structure and Function of Essential Body Parts</h3>
+                            <h3><i class="fas fa-user-injured"></i> 3. Structure and Function of Essential Body Parts</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="first-aid-content">
@@ -202,76 +204,465 @@
                         </div>
                     </div>
 
-                    <!-- Basic Life Support -->
+                    <!-- 4. Basic Life Support -->
                     <div class="first-aid-item">
                         <div class="first-aid-header" onclick="toggleFirstAid(this)">
-                            <h3><i class="fas fa-heartbeat"></i> Basic Life Support (Resuscitation)</h3>
+                            <h3><i class="fas fa-heartbeat"></i> 4. Basic Life Support (Resuscitation)</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="first-aid-content">
                             <div class="subsection">
                                 <h4>Key Steps for CPR</h4>
-                                <ol>
-                                    <li>Check Responsiveness – Shake the person and call out</li>
-                                    <li>Perform Chest Compressions – At least 2 inches deep at a rate of 100-120 per minute</li>
-                                    <li>Give Rescue Breaths – Two breaths after every 30 compressions</li>
-                                    <li>Repeat until Medical Help Arrives</li>
-                                    <li>Use an Automated External Defibrillator (AED) if available and follow voice instructions</li>
-                                </ol>
+                                <div class="steps-grid">
+                                    <div class="step-card">
+                                        <img src="images/cpr-check.jpg" alt="Check responsiveness">
+                                        <p>1. Check Responsiveness – Shake and shout</p>
+                                    </div>
+                                    <div class="step-card">
+                                        <img src="images/cpr-position.jpg" alt="Position hands">
+                                        <p>2. Position hands in center of chest</p>
+                                    </div>
+                                    <div class="step-card">
+                                        <img src="images/cpr-compression.jpg" alt="Perform compressions">
+                                        <p>3. Perform 30 chest compressions</p>
+                                    </div>
+                                    <div class="step-card">
+                                        <img src="images/cpr-breath.jpg" alt="Give rescue breaths">
+                                        <p>4. Give 2 rescue breaths</p>
+                                    </div>
+                                    <div class="step-card">
+                                        <img src="images/cpr-repeat.jpg" alt="Repeat cycle">
+                                        <p>5. Repeat cycle of 30:2</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="subsection">
                                 <h4>Heimlich Maneuver (Choking First Aid)</h4>
-                                <ol>
-                                    <li>Stand behind the choking person</li>
-                                    <li>Wrap arms around their waist</li>
-                                    <li>Make a fist and place it above their navel</li>
-                                    <li>Grasp the fist with your other hand and thrust sharply inward and upward</li>
-                                    <li>Repeat until the object is expelled</li>
-                                    <li>If the person is unconscious, begin CPR immediately</li>
-                                    <li>Encourage small sips of water if the person is able to breathe but still feels discomfort</li>
-                                </ol>
+                                <div class="steps-grid">
+                                    <div class="step-card">
+                                        <img src="images/heimlich-position.jpg" alt="Position behind person">
+                                        <p>1. Stand behind the person</p>
+                                    </div>
+                                    <div class="step-card">
+                                        <img src="images/heimlich-fist.jpg" alt="Make a fist">
+                                        <p>2. Make a fist above their navel</p>
+                                    </div>
+                                    <div class="step-card">
+                                        <img src="images/heimlich-thrust.jpg" alt="Perform thrust">
+                                        <p>3. Give quick, upward thrusts</p>
+                                    </div>
+                                    <div class="step-card">
+                                        <img src="images/heimlich-repeat.jpg" alt="Repeat if needed">
+                                        <p>4. Repeat until object is expelled</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="warning-box">
+                                <p><i class="fas fa-exclamation-triangle"></i> Important: These images are for reference only. Proper training is essential for performing these procedures effectively.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Emergency First Aid -->
+                    <!-- Emergency Conditions - Previously nested under section 5 -->
                     <div class="first-aid-item">
                         <div class="first-aid-header" onclick="toggleFirstAid(this)">
-                            <h3><i class="fas fa-first-aid"></i> First Aid in Emergencies</h3>
+                            <h3><i class="fas fa-burn"></i> Burns</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Cool the burn with running water</li>
+                                <li>Cover with a sterile dressing</li>
+                                <li>Avoid applying creams or breaking blisters</li>
+                                <li>Seek medical help for severe burns</li>
+                                <li>Remove any tight clothing or jewelry near the affected area</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-tint"></i> Bleeding</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Apply direct pressure</li>
+                                <li>Elevate the injured limb</li>
+                                <li>Use a clean dressing to cover the wound</li>
+                                <li>Seek immediate help for severe bleeding</li>
+                                <li>Apply a tourniquet only as a last resort</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-bone"></i> Fractures</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Immobilize the limb using splints</li>
+                                <li>Apply a sling for arm fractures</li>
+                                <li>Avoid unnecessary movement</li>
+                                <li>Seek professional medical attention</li>
+                                <li>Do not attempt to realign the bone yourself</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-head-side-cough"></i> Choking</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Encourage coughing</li>
+                                <li>Perform 5 back blows</li>
+                                <li>If unsuccessful, perform abdominal thrusts (Heimlich maneuver)</li>
+                                <li>Call emergency services if needed</li>
+                                <li>Check for signs of cyanosis (bluish skin)</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-skull-crossbones"></i> Poisoning</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Identify the poison</li>
+                                <li>Do not induce vomiting unless instructed</li>
+                                <li>Seek emergency medical help immediately</li>
+                                <li>If inhaled, move the person to fresh air</li>
+                                <li>Store all household chemicals and medicines safely</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-snake"></i> Snake Bites</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Keep the victim calm and still</li>
+                                <li>Immobilize the affected limb</li>
+                                <li>Do not suck the venom out</li>
+                                <li>Seek medical assistance immediately</li>
+                                <li>Keep the bite area below heart level</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-bolt"></i> Electric Shock</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Do not touch the person until power is off</li>
+                                <li>Turn off electricity at source</li>
+                                <li>Call emergency services immediately</li>
+                                <li>Check breathing and pulse; begin CPR if needed</li>
+                                <li>Cover burns with sterile dressing</li>
+                                <li>Monitor for shock</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-head-injury"></i> Head Injury</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Check consciousness and breathing</li>
+                                <li>Keep the person still and lying down</li>
+                                <li>Apply cold compress to reduce swelling</li>
+                                <li>Monitor for signs of concussion (confusion, dizziness)</li>
+                                <li>Do not let the person sleep if concussion is suspected</li>
+                                <li>Seek immediate medical attention</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-band-aid"></i> Sprains and Strains</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Remember RICE:
+                                    <ul>
+                                        <li>Rest the injured area</li>
+                                        <li>Ice for 20 minutes every 2-3 hours</li>
+                                        <li>Compression with elastic bandage</li>
+                                        <li>Elevation above heart level</li>
+                                    </ul>
+                                </li>
+                                <li>Avoid heat for first 48 hours</li>
+                                <li>Do not massage the injured area</li>
+                                <li>Seek medical attention if severe</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-temperature-high"></i> Heat Exhaustion/Stroke</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Move to a cool place</li>
+                                <li>Remove excess clothing</li>
+                                <li>Apply cool, wet cloths</li>
+                                <li>Fan the person</li>
+                                <li>Give sips of water if conscious</li>
+                                <li>Call emergency services if condition worsens</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-temperature-low"></i> Hypothermia</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Move to warm environment</li>
+                                <li>Remove wet clothing</li>
+                                <li>Wrap in warm blankets</li>
+                                <li>Give warm beverages if conscious</li>
+                                <li>Do not apply direct heat</li>
+                                <li>Seek medical attention</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-eye"></i> Eye Injuries</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Do not rub the eye</li>
+                                <li>Flush with clean water for chemical exposure</li>
+                                <li>Cover the eye with a sterile pad</li>
+                                <li>Seek immediate medical attention</li>
+                                <li>Do not attempt to remove embedded objects</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-tooth"></i> Dental Injuries</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Save any knocked-out teeth</li>
+                                <li>Hold tooth by crown, not root</li>
+                                <li>Rinse tooth without scrubbing</li>
+                                <li>Place in milk or saline solution</li>
+                                <li>See dentist within 30 minutes if possible</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-brain"></i> Seizures</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Clear the area of hazards</li>
+                                <li>Protect head with something soft</li>
+                                <li>Do not restrain the person</li>
+                                <li>Do not put anything in their mouth</li>
+                                <li>Time the seizure if possible</li>
+                                <li>Place in recovery position after seizure ends</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-bug"></i> Insect Bites/Stings</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Remove stinger if present</li>
+                                <li>Clean the area with soap and water</li>
+                                <li>Apply cold compress</li>
+                                <li>Use calamine lotion or antihistamine</li>
+                                <li>Monitor for allergic reaction</li>
+                                <li>Seek medical help if allergic symptoms develop</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-water"></i> Drowning</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Remove from water safely</li>
+                                <li>Check breathing and circulation</li>
+                                <li>Begin CPR if necessary</li>
+                                <li>Remove wet clothing</li>
+                                <li>Keep person warm</li>
+                                <li>Seek emergency medical care</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-lungs"></i> Asthma Attack</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Help person sit upright</li>
+                                <li>Assist with prescribed inhaler</li>
+                                <li>Keep person calm</li>
+                                <li>Loosen tight clothing</li>
+                                <li>Call emergency if symptoms worsen</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-droplet"></i> Nosebleed</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Sit upright and lean slightly forward</li>
+                                <li>Pinch soft part of nose</li>
+                                <li>Breathe through mouth</li>
+                                <li>Hold for 10-15 minutes</li>
+                                <li>Apply cold compress to nose/face</li>
+                                <li>Seek help if bleeding persists</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-syringe"></i> Diabetic Emergency</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Check if person is conscious</li>
+                                <li>If conscious and blood sugar low:
+                                    <ul>
+                                        <li>Give sugar, sweet juice, or glucose tablets</li>
+                                        <li>Wait 15 minutes and recheck</li>
+                                    </ul>
+                                </li>
+                                <li>If unconscious:
+                                    <ul>
+                                        <li>Place in recovery position</li>
+                                        <li>Call emergency services</li>
+                                    </ul>
+                                </li>
+                                <li>Monitor breathing and pulse</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-heart"></i> Chest Pain</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <ol>
+                                <li>Help person sit in comfortable position</li>
+                                <li>Call emergency services immediately</li>
+                                <li>Loosen tight clothing</li>
+                                <li>Monitor breathing and consciousness</li>
+                                <li>Be prepared to perform CPR</li>
+                                <li>Give aspirin if available and no allergies</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- 6. Additional Tips -->
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-info-circle"></i> 6. Additional First Aid Tips</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="first-aid-content">
                             <div class="subsection">
-                                <h4>Burns</h4>
-                                <ol>
-                                <h4>Signs & Symptoms:</h4>
+                                <h4>General Tips</h4>
                                 <ul>
-                                    <li>Burns at contact points</li>
-                                    <li>Muscle pain and contractions</li>
-                                    <li>Difficulty breathing</li>
-                                    <li>Irregular heartbeat</li>
-                                    <li>Seizures or unconsciousness</li>
+                                    <li>Learn the recovery position for unconscious but breathing individuals</li>
+                                    <li>Teach children basic first aid and emergency contact numbers</li>
+                                    <li>Have an emergency plan in place at home and work</li>
+                                    <li>Store first aid kits in accessible locations</li>
+                                    <li>Take a certified first aid course for hands-on training</li>
                                 </ul>
-                            </div>
-                            <div class="subsection">
-                                <h4>Treatment Steps:</h4>
-                                <ol>
-                                    <li>Ensure scene is safe</li>
-                                    <li>Turn off power source if possible</li>
-                                    <li>Check breathing and pulse</li>
-                                    <li>Begin CPR if necessary</li>
-                                    <li>Cool any burns with clean water</li>
-                                    <li>Seek immediate medical attention</li>
-                                </ol>
-                            </div>
-                            <div class="warning-box">
-                                <p><i class="fas fa-exclamation-triangle"></i> Never touch the person while they are still in contact with the electrical source</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Add more first aid items here -->
-
+                    <!-- 7. Do's and Don'ts -->
+                    <div class="first-aid-item">
+                        <div class="first-aid-header" onclick="toggleFirstAid(this)">
+                            <h3><i class="fas fa-check-circle"></i> 7. Emergency First Aid Do's and Don'ts</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="first-aid-content">
+                            <div class="subsection">
+                                <h4>Do's</h4>
+                                <ul>
+                                    <li>Stay calm and assess the situation</li>
+                                    <li>Call emergency services when necessary</li>
+                                    <li>Use protective gear like gloves</li>
+                                    <li>Apply firm pressure to control bleeding</li>
+                                    <li>Keep the person warm and comfortable</li>
+                                    <li>Encourage the injured person to stay still if spinal injury is suspected</li>
+                                </ul>
+                            </div>
+                            <div class="subsection">
+                                <h4>Don'ts</h4>
+                                <ul>
+                                    <li>Do not move an unconscious person unnecessarily</li>
+                                    <li>Do not apply ice directly to burns</li>
+                                    <li>Do not give food or drinks to an unconscious person</li>
+                                    <li>Do not attempt to reset a broken bone</li>
+                                    <li>Do not remove deeply embedded objects from a wound</li>
+                                    <li>Do not leave a person alone if they are in critical condition</li>
+                                    <li>Do not touch a person experiencing electric shock without ensuring power is off</li>
+                                </ul>
+                            </div>
+                            <div class="warning-box">
+                                <p><i class="fas fa-exclamation-triangle"></i> Remember: This guide is for basic first aid only. Always seek professional medical help in serious situations.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
