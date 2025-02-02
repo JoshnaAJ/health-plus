@@ -648,11 +648,25 @@ function createDateCell(day, date) {
 
     // Add mood icon if exists for this date
     if (moodData[dateStr]) {
+        const moodContainer = document.createElement('div');
+        moodContainer.className = 'mood-container';
+        
         const moodIcon = document.createElement('i');
         moodIcon.className = `fas fa-${moodData[dateStr]}`;
         moodIcon.style.fontSize = '1rem';
-        moodIcon.style.marginLeft = '0.2rem';
-        cell.appendChild(moodIcon);
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-mood-btn';
+        deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+        deleteBtn.title = 'Delete mood';
+        deleteBtn.onclick = (e) => {
+            e.stopPropagation(); // Prevent cell click event
+            deleteMoodEntry(dateStr);
+        };
+
+        moodContainer.appendChild(moodIcon);
+        moodContainer.appendChild(deleteBtn);
+        cell.appendChild(moodContainer);
     }
 
     // Check for habits completed on this date
@@ -668,7 +682,16 @@ function createDateCell(day, date) {
         cell.classList.add('active');
     }
 
-    cell.addEventListener('click', () => toggleHabitCompletion(date));
+    // Add click handler for mood notes display
+    cell.addEventListener('click', (e) => {
+        if (e.target.closest('.delete-mood-btn')) return; // Ignore if delete button was clicked
+        
+        if (moodData[dateStr]) {
+            showMoodNotes(dateStr);
+        }
+        toggleHabitCompletion(date);
+    });
+
     return cell;
 }
 
@@ -1097,4 +1120,74 @@ document.querySelector('.nav-links').addEventListener('mouseleave', () => {
 document.addEventListener('DOMContentLoaded', () => {
     updateChibiVisibility();
     // ... existing initialization code ...
-}); 
+});
+
+// Add function to delete mood entry
+function deleteMoodEntry(dateStr) {
+    if (confirm('Are you sure you want to delete this mood entry?')) {
+        // Get mood history
+        const moodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
+        
+        // Remove from mood history
+        const updatedHistory = moodHistory.filter(entry => 
+            entry.date.split('T')[0] !== dateStr
+        );
+        
+        // Remove from mood data
+        delete moodData[dateStr];
+        
+        // Save updates
+        localStorage.setItem('moodHistory', JSON.stringify(updatedHistory));
+        localStorage.setItem('moodData', JSON.stringify(moodData));
+        
+        // Update calendar
+        updateCalendar();
+        showNotification('Mood entry deleted successfully!');
+    }
+}
+
+// Add function to show mood notes
+function showMoodNotes(dateStr) {
+    const moodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
+    const entry = moodHistory.find(entry => entry.date.split('T')[0] === dateStr);
+    
+    if (entry) {
+        // Create and show modal
+        const modal = document.createElement('div');
+        modal.className = 'mood-notes-modal';
+        
+        const modalContent = document.createElement('div');
+        modalContent.className = 'mood-notes-content';
+        
+        const date = new Date(dateStr).toLocaleDateString();
+        const mood = Object.keys(moodIcons).find(key => moodIcons[key] === moodData[dateStr]);
+        
+        modalContent.innerHTML = `
+            <h3>Mood Entry for ${date}</h3>
+            <p class="mood-display">
+                <i class="fas fa-${moodData[dateStr]}"></i>
+                <span>${mood.charAt(0).toUpperCase() + mood.slice(1)}</span>
+            </p>
+            <div class="notes-section">
+                <h4>Notes:</h4>
+                <p>${entry.notes || 'No notes added'}</p>
+            </div>
+            <div class="modal-actions">
+                <button class="delete-entry-btn" onclick="deleteMoodEntry('${dateStr}')">
+                    <i class="fas fa-trash"></i> Delete Entry
+                </button>
+                <button class="close-modal-btn">Close</button>
+            </div>
+        `;
+        
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+        
+        // Close modal when clicking outside or on close button
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.classList.contains('close-modal-btn')) {
+                modal.remove();
+            }
+        });
+    }
+} 
