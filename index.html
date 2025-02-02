@@ -9,12 +9,12 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">HealthPlus</div>
+        <div class="nav-brand" onclick="navigateTo('home')" style="cursor: pointer;">HealthPlus</div>
         <div class="nav-links">
-            <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
             <a href="#symptom-checker"><i class="fas fa-stethoscope"></i> Symptom Checker</a>
             <a href="#bmi-calculator"><i class="fas fa-calculator"></i> BMI Calculator</a>
             <a href="#lifestyle-diseases"><i class="fas fa-heartbeat"></i> Lifestyle Diseases</a>
+            <a href="#habit-tracker"><i class="fas fa-calendar-check"></i> Habit Tracker</a>
             <a href="#first-aid-guide"><i class="fas fa-kit-medical"></i> First Aid</a>
             <a href="#health-tips"><i class="fas fa-lightbulb"></i> Health Tips</a>
         </div>
@@ -27,6 +27,36 @@
             <div id="daily-tip"></div>
             <h1>Welcome to HealthPlus</h1>
             <p>Your personal healthcare assistant powered by AI</p>
+
+            <!-- Mood Tracker Card in Homepage -->
+            <div class="home-mood-tracker">
+                <h3><i class="fas fa-smile"></i> How are you feeling today?</h3>
+                <div class="mood-selector">
+                    <button class="mood-btn" data-mood="great">
+                        <i class="fas fa-laugh-beam"></i>
+                        <span>Great</span>
+                    </button>
+                    <button class="mood-btn" data-mood="good">
+                        <i class="fas fa-smile"></i>
+                        <span>Good</span>
+                    </button>
+                    <button class="mood-btn" data-mood="okay">
+                        <i class="fas fa-meh"></i>
+                        <span>Okay</span>
+                    </button>
+                    <button class="mood-btn" data-mood="bad">
+                        <i class="fas fa-frown"></i>
+                        <span>Bad</span>
+                    </button>
+                    <button class="mood-btn" data-mood="terrible">
+                        <i class="fas fa-sad-tear"></i>
+                        <span>Terrible</span>
+                    </button>
+                </div>
+                <textarea id="moodNotes" placeholder="Add notes about your day..."></textarea>
+                <button id="saveMood" class="primary-btn">Save Mood</button>
+            </div>
+
             <div class="features-grid">
                 <div class="feature-card" onclick="navigateTo('symptom-checker')">
                     <i class="fas fa-stethoscope"></i>
@@ -836,6 +866,135 @@
             </div>
         </section>
 
+        <!-- Add new Habit Tracker Section before First Aid Guide Section -->
+        <section id="habit-tracker" class="section">
+            <h2>Healthy Habit Tracker</h2>
+            <div class="habit-tracker-container">
+                <div class="habit-input-section">
+                    <h3>Create New Healthy Habits</h3>
+                    <div class="habit-form">
+                        <div class="habit-input-group">
+                            <input type="text" id="habit-name" placeholder="Enter new habit (e.g., 'Morning Walk')">
+                            <select id="habit-category">
+                                <option value="exercise">Exercise</option>
+                                <option value="nutrition">Nutrition</option>
+                                <option value="mindfulness">Mindfulness</option>
+                                <option value="sleep">Sleep</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <button onclick="addHabit()" class="add-habit-btn">
+                                <i class="fas fa-plus"></i> Add Habit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habits-list">
+                    <div class="habits-header">
+                        <h3>Your Habits</h3>
+                        <p>Track up to 5 habits at a time for better focus</p>
+                    </div>
+                    <div id="habits-container">
+                        <!-- Habits will be listed here -->
+                    </div>
+                </div>
+
+                <div class="calendar-section">
+                    <div class="calendar-header">
+                        <button onclick="previousMonth()" class="calendar-nav-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <h3 id="current-month">September 2023</h3>
+                        <button onclick="nextMonth()" class="calendar-nav-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-days">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+                        <div id="calendar-dates" class="calendar-dates">
+                            <!-- Calendar dates will be generated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habit-stats">
+                    <h3>Progress Overview</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-fire"></i>
+                            <h4>Current Streak</h4>
+                            <p id="current-streak">0 days</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-trophy"></i>
+                            <h4>Best Streak</h4>
+                            <p id="best-streak">0 days</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Completion Rate</h4>
+                            <p id="completion-rate">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medicine Reminder Section -->
+            <div class="medicine-reminder-container">
+                <h3><i class="fas fa-pills"></i> Medicine Reminder</h3>
+                <div class="medicine-content">
+                    <!-- Add Medication Form -->
+                    <div class="add-medication-card">
+                        <h4>Add Medication</h4>
+                        <form id="medicationForm">
+                            <div class="form-group">
+                                <label for="medName">Medication Name</label>
+                                <input type="text" id="medName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="medDosage">Dosage</label>
+                                <input type="text" id="medDosage" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="medFrequency">Frequency</label>
+                                <select id="medFrequency" required>
+                                    <option value="daily">Daily</option>
+                                    <option value="twice">Twice Daily</option>
+                                    <option value="thrice">Thrice Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="medTime">Time</label>
+                                <input type="time" id="medTime" required>
+                            </div>
+                            
+                            <button type="submit" class="primary-btn">Add Medication</button>
+                        </form>
+                    </div>
+
+                    <!-- Medication List -->
+                    <div class="medication-list-card">
+                        <h4><i class="fas fa-list"></i> Your Medications</h4>
+                        <div id="medicationList" class="medication-list">
+                            <!-- Medications will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- First Aid Guide Section -->
         <section id="first-aid-guide" class="section">
             <h2>First Aid Guide</h2>
@@ -1379,6 +1538,72 @@
                             <div class="warning-box">
                                 <p><i class="fas fa-exclamation-triangle"></i> Remember: This guide is for basic first aid only. Always seek professional medical help in serious situations.</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mental Health Support Section -->
+        <section id="mental-health" class="section">
+            <h2>Mental Health Support</h2>
+            
+            <!-- Mood Tracker -->
+            <div class="mental-health-container">
+                <div class="mood-tracker-card">
+                    <h3><i class="fas fa-smile"></i> Daily Mood Tracker</h3>
+                    <div class="mood-selector">
+                        <button class="mood-btn" data-mood="great">
+                            <i class="fas fa-laugh-beam"></i>
+                            <span>Great</span>
+                        </button>
+                        <button class="mood-btn" data-mood="good">
+                            <i class="fas fa-smile"></i>
+                            <span>Good</span>
+                        </button>
+                        <button class="mood-btn" data-mood="okay">
+                            <i class="fas fa-meh"></i>
+                            <span>Okay</span>
+                        </button>
+                        <button class="mood-btn" data-mood="bad">
+                            <i class="fas fa-frown"></i>
+                            <span>Bad</span>
+                        </button>
+                        <button class="mood-btn" data-mood="terrible">
+                            <i class="fas fa-sad-tear"></i>
+                            <span>Terrible</span>
+                        </button>
+                    </div>
+                    <textarea id="moodNotes" placeholder="Add notes about your day..."></textarea>
+                    <button id="saveMood" class="primary-btn">Save Mood</button>
+                </div>
+
+                <!-- Meditation Timer -->
+                <div class="meditation-card">
+                    <h3><i class="fas fa-om"></i> Meditation Timer</h3>
+                    <div class="meditation-timer">
+                        <div class="timer-display">
+                            <span id="minutes">05</span>:<span id="seconds">00</span>
+                        </div>
+                        <div class="timer-controls">
+                            <button id="startMeditation" class="primary-btn">Start</button>
+                            <button id="pauseMeditation" class="secondary-btn" disabled>Pause</button>
+                            <button id="resetMeditation" class="secondary-btn">Reset</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="resources-card">
+                    <h3><i class="fas fa-phone"></i> 24/7 Support Helplines</h3>
+                    <div class="helpline-list">
+                        <div class="helpline-item">
+                            <h4>Emergency Mental Health</h4>
+                            <p><i class="fas fa-phone-alt"></i> 988</p>
+                        </div>
+                        <div class="helpline-item">
+                            <h4>Crisis Text Line</h4>
+                            <p><i class="fas fa-comment-dots"></i> Text HOME to 741741</p>
                         </div>
                     </div>
                 </div>

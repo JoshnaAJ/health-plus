@@ -12,22 +12,31 @@ function navigateTo(sectionId) {
     // Show selected section
     document.getElementById(sectionId).classList.add('active');
     
-    // Update active nav link
+    // Update active state in navigation
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + sectionId) {
+        if (link.getAttribute('href') === `#${sectionId}`) {
             link.classList.add('active');
+        } else {
+            link.classList.remove('active');
         }
     });
+
+    // Scroll to top when navigating
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Handle navigation links
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const sectionId = e.currentTarget.getAttribute('href').substring(1);
-        navigateTo(sectionId);
+// Add click event listeners to all navigation links
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const sectionId = link.getAttribute('href').substring(1);
+            navigateTo(sectionId);
+        });
     });
+
+    // Set home as default active section
+    navigateTo('home');
 });
 
 // Symptom Checker Chat
@@ -447,6 +456,18 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDailyTip();
     updateFitnessQuote();
     addFirstAidCard();
+    
+    // Add Habit Tracker card
+    const featuresGrid = document.querySelector('.features-grid');
+    const habitTrackerCard = document.createElement('div');
+    habitTrackerCard.className = 'feature-card';
+    habitTrackerCard.onclick = () => navigateTo('habit-tracker');
+    habitTrackerCard.innerHTML = `
+        <i class="fas fa-calendar-check"></i>
+        <h3>Habit Tracker</h3>
+        <p>Track and maintain healthy daily habits</p>
+    `;
+    featuresGrid.appendChild(habitTrackerCard);
 });
 
 // Search functionality for first aid topics
@@ -505,4 +526,525 @@ document.getElementById('diseaseSearch').addEventListener('input', function(e) {
             item.style.display = 'none';
         }
     });
+});
+
+// Habit Tracker Functionality
+let habits = [];
+let currentDate = new Date();
+let moodData = JSON.parse(localStorage.getItem('moodData')) || {};
+
+function addHabit() {
+    if (habits.length >= 5) {
+        alert('You can only track up to 5 habits at a time');
+        return;
+    }
+
+    const habitName = document.getElementById('habit-name').value.trim();
+    const category = document.getElementById('habit-category').value;
+
+    if (!habitName) {
+        alert('Please enter a habit name');
+        return;
+    }
+
+    const habit = {
+        id: Date.now(),
+        name: habitName,
+        category: category,
+        completedDates: [],
+        currentStreak: 0,
+        bestStreak: 0
+    };
+
+    habits.push(habit);
+    document.getElementById('habit-name').value = '';
+    updateHabitsList();
+    updateCalendar();
+    saveHabits();
+}
+
+function updateHabitsList() {
+    const container = document.getElementById('habits-container');
+    container.innerHTML = habits.map(habit => `
+        <div class="habit-item" data-id="${habit.id}">
+            <div class="habit-info">
+                <i class="fas fa-${getCategoryIcon(habit.category)}"></i>
+                <span>${habit.name}</span>
+            </div>
+            <button onclick="deleteHabit(${habit.id})" class="delete-btn">
+                <i class="fas fa-trash"></i>
+                Delete
+            </button>
+        </div>
+    `).join('');
+}
+
+function getCategoryIcon(category) {
+    const icons = {
+        exercise: 'running',
+        nutrition: 'apple-alt',
+        mindfulness: 'brain',
+        sleep: 'moon',
+        other: 'star'
+    };
+    return icons[category] || 'star';
+}
+
+function deleteHabit(id) {
+    if (confirm('Are you sure you want to delete this habit? This action cannot be undone.')) {
+        habits = habits.filter(h => h.id !== id);
+        updateHabitsList();
+        updateCalendar();
+        updateStats();
+        saveHabits();
+    }
+}
+
+function updateCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysInMonth = lastDay.getDate();
+    const startingDay = firstDay.getDay();
+
+    document.getElementById('current-month').textContent = 
+        new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(currentDate);
+
+    const calendarDates = document.getElementById('calendar-dates');
+    calendarDates.innerHTML = '';
+
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < startingDay; i++) {
+        calendarDates.appendChild(createDateCell(''));
+    }
+
+    // Add cells for each day of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month, day);
+        const cell = createDateCell(day, date);
+        calendarDates.appendChild(cell);
+    }
+
+    updateStats();
+}
+
+function createDateCell(day, date) {
+    const cell = document.createElement('div');
+    cell.className = 'calendar-date';
+    cell.textContent = day;
+
+    if (!day) return cell;
+
+    const dateStr = date.toISOString().split('T')[0];
+    const today = new Date().toISOString().split('T')[0];
+
+    // Check for habits completed on this date
+    const hasCompletedHabits = habits.some(habit => 
+        habit.completedDates.includes(dateStr)
+    );
+
+    if (hasCompletedHabits) {
+        cell.classList.add('completed');
+    }
+
+    // Add mood icon if exists for this date
+    if (moodData[dateStr]) {
+        const moodIcon = document.createElement('i');
+        moodIcon.className = `fas fa-${moodData[dateStr]}`;
+        moodIcon.style.fontSize = '1rem';
+        moodIcon.style.marginLeft = '0.5rem';
+        cell.appendChild(moodIcon);
+    }
+
+    if (dateStr === today) {
+        cell.classList.add('active');
+    }
+
+    cell.addEventListener('click', () => toggleHabitCompletion(date));
+    return cell;
+}
+
+function toggleHabitCompletion(date) {
+    habits.forEach(habit => {
+        const index = habit.completedDates.indexOf(date.toISOString().split('T')[0]);
+        if (index === -1) {
+            habit.completedDates.push(date.toISOString().split('T')[0]);
+        } else {
+            habit.completedDates.splice(index, 1);
+        }
+        calculateStreak(habit);
+    });
+    
+    updateCalendar();
+    saveHabits();
+}
+
+function calculateStreak(habit) {
+    let currentStreak = 0;
+    let bestStreak = habit.bestStreak;
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < 365; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().split('T')[0];
+
+        if (habit.completedDates.includes(dateStr)) {
+            currentStreak++;
+            if (currentStreak > bestStreak) {
+                bestStreak = currentStreak;
+            }
+        } else {
+            break;
+        }
+    }
+
+    habit.currentStreak = currentStreak;
+    habit.bestStreak = bestStreak;
+}
+
+function updateStats() {
+    let totalCompleted = 0;
+    let totalPossible = 0;
+    let maxCurrentStreak = 0;
+    let maxBestStreak = 0;
+
+    habits.forEach(habit => {
+        totalCompleted += habit.completedDates.length;
+        totalPossible += getDaysTracked(habit);
+        maxCurrentStreak = Math.max(maxCurrentStreak, habit.currentStreak);
+        maxBestStreak = Math.max(maxBestStreak, habit.bestStreak);
+    });
+
+    const completionRate = totalPossible ? Math.round((totalCompleted / totalPossible) * 100) : 0;
+
+    document.getElementById('current-streak').textContent = `${maxCurrentStreak} days`;
+    document.getElementById('best-streak').textContent = `${maxBestStreak} days`;
+    document.getElementById('completion-rate').textContent = `${completionRate}%`;
+}
+
+function getDaysTracked(habit) {
+    const firstDate = new Date(Math.min(...habit.completedDates.map(d => new Date(d))));
+    const today = new Date();
+    return Math.ceil((today - firstDate) / (1000 * 60 * 60 * 24)) || 1;
+}
+
+function previousMonth() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    updateCalendar();
+}
+
+function nextMonth() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    updateCalendar();
+}
+
+function saveHabits() {
+    localStorage.setItem('habits', JSON.stringify(habits));
+}
+
+function loadHabits() {
+    const savedHabits = localStorage.getItem('habits');
+    if (savedHabits) {
+        habits = JSON.parse(savedHabits);
+        updateHabitsList();
+        updateCalendar();
+    }
+
+    // Load mood data
+    const savedMoodData = localStorage.getItem('moodData');
+    if (savedMoodData) {
+        moodData = JSON.parse(savedMoodData);
+    }
+}
+
+// Initialize habit tracker
+document.addEventListener('DOMContentLoaded', () => {
+    loadHabits();
+    // ... existing initialization code ...
+});
+
+// Mental Health Support System
+const MentalHealthSupport = {
+    init() {
+        this.initMoodTracker();
+        this.initMeditationTimer();
+        this.loadMoodHistory();
+    },
+
+    initMoodTracker() {
+        const moodButtons = document.querySelectorAll('.mood-btn');
+        const saveButton = document.getElementById('saveMood');
+        
+        moodButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                moodButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        saveButton.addEventListener('click', () => {
+            const selectedMood = document.querySelector('.mood-btn.active');
+            const notes = document.getElementById('moodNotes').value;
+            
+            if (selectedMood) {
+                this.saveMoodEntry(selectedMood.dataset.mood, notes);
+            }
+        });
+    },
+
+    saveMoodEntry(mood, notes) {
+        const entry = {
+            mood,
+            notes,
+            date: new Date().toISOString()
+        };
+
+        const moodHistory = JSON.parse(localStorage.getItem('moodHistory') || '[]');
+        moodHistory.push(entry);
+        localStorage.setItem('moodHistory', JSON.stringify(moodHistory));
+
+        // Save mood to calendar data
+        const today = new Date().toISOString().split('T')[0];
+        moodData[today] = getMoodIcon(mood);
+        localStorage.setItem('moodData', JSON.stringify(moodData));
+
+        updateCalendar(); // Update calendar display
+        showNotification('Mood saved successfully!');
+    },
+
+    initMeditationTimer() {
+        let timer;
+        let timeLeft = 300; // 5 minutes in seconds
+        
+        const startBtn = document.getElementById('startMeditation');
+        const pauseBtn = document.getElementById('pauseMeditation');
+        const resetBtn = document.getElementById('resetMeditation');
+
+        startBtn.addEventListener('click', () => {
+            timer = setInterval(() => {
+                timeLeft--;
+                this.updateTimerDisplay(timeLeft);
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    this.showNotification('Meditation session completed!');
+                }
+            }, 1000);
+
+            startBtn.disabled = true;
+            pauseBtn.disabled = false;
+        });
+
+        // Add pause and reset functionality
+    },
+
+    updateTimerDisplay(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        
+        document.getElementById('minutes').textContent = 
+            String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = 
+            String(remainingSeconds).padStart(2, '0');
+    }
+};
+
+// Medication Reminder System
+const MedicationReminder = {
+    init() {
+        this.initForm();
+        this.loadMedications();
+        this.checkPermissions();
+    },
+
+    initForm() {
+        const form = document.getElementById('medicationForm');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const medication = {
+                name: document.getElementById('medName').value,
+                dosage: document.getElementById('medDosage').value,
+                frequency: document.getElementById('medFrequency').value,
+                time: document.getElementById('medTime').value,
+                id: Date.now()
+            };
+
+            this.addMedication(medication);
+            form.reset();
+        });
+    },
+
+    addMedication(medication) {
+        const medications = this.getMedications();
+        medications.push(medication);
+        localStorage.setItem('medications', JSON.stringify(medications));
+        
+        this.scheduleReminder(medication);
+        this.renderMedications();
+    },
+
+    scheduleReminder(medication) {
+        if (Notification.permission === 'granted') {
+            const [hours, minutes] = medication.time.split(':');
+            const now = new Date();
+            const scheduledTime = new Date();
+            
+            scheduledTime.setHours(hours, minutes, 0);
+            
+            if (scheduledTime < now) {
+                scheduledTime.setDate(scheduledTime.getDate() + 1);
+            }
+
+            const timeUntilReminder = scheduledTime - now;
+            
+            setTimeout(() => {
+                new Notification('Medication Reminder', {
+                    body: `Time to take ${medication.name} - ${medication.dosage}`,
+                    icon: '/path/to/icon.png'
+                });
+            }, timeUntilReminder);
+        }
+    },
+
+    renderMedications() {
+        const medications = this.getMedications();
+        const container = document.getElementById('medicationList');
+        
+        container.innerHTML = medications.map(med => `
+            <div class="medication-item">
+                <div class="medication-info">
+                    <h4>${med.name}</h4>
+                    <p>${med.dosage} - ${med.frequency} at ${med.time}</p>
+                </div>
+                <div class="medication-actions">
+                    <button onclick="MedicationReminder.deleteMedication(${med.id})"
+                            class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    },
+
+    getMedications() {
+        return JSON.parse(localStorage.getItem('medications') || '[]');
+    },
+
+    deleteMedication(id) {
+        const medications = this.getMedications().filter(med => med.id !== id);
+        localStorage.setItem('medications', JSON.stringify(medications));
+        this.renderMedications();
+    },
+
+    async checkPermissions() {
+        if (Notification.permission !== 'granted') {
+            await Notification.requestPermission();
+        }
+    }
+};
+
+// Initialize both systems
+document.addEventListener('DOMContentLoaded', () => {
+    MentalHealthSupport.init();
+    MedicationReminder.init();
+});
+
+// Add function to get mood icon
+function getMoodIcon(mood) {
+    const moodIcons = {
+        'great': 'laugh-beam',
+        'good': 'smile',
+        'okay': 'meh',
+        'bad': 'frown',
+        'terrible': 'sad-tear'
+    };
+    return moodIcons[mood] || 'smile';
+}
+
+// Update the existing loadHabits function
+function loadHabits() {
+    const savedHabits = localStorage.getItem('habits');
+    if (savedHabits) {
+        habits = JSON.parse(savedHabits);
+        updateHabitsList();
+        updateCalendar();
+    }
+
+    // Load mood data
+    const savedMoodData = localStorage.getItem('moodData');
+    if (savedMoodData) {
+        moodData = JSON.parse(savedMoodData);
+    }
+}
+
+// Update saveMood button event listener
+document.getElementById('saveMood').addEventListener('click', () => {
+    const selectedMood = document.querySelector('.mood-btn.active');
+    const notes = document.getElementById('moodNotes').value;
+    
+    if (selectedMood) {
+        saveMoodEntry(selectedMood.dataset.mood, notes);
+        document.getElementById('moodNotes').value = '';
+        document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('active'));
+    } else {
+        showNotification('Please select a mood first!', 'error');
+    }
+});
+
+// Update the calendar CSS styles
+const calendarStyles = document.createElement('style');
+calendarStyles.textContent = `
+    .calendar-date {
+        position: relative;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .calendar-date i {
+        color: var(--color-primary);
+    }
+
+    .calendar-date.completed i {
+        color: white;
+    }
+`;
+document.head.appendChild(calendarStyles);
+
+// Update the existing loadHabits function
+function loadHabits() {
+    const savedHabits = localStorage.getItem('habits');
+    if (savedHabits) {
+        habits = JSON.parse(savedHabits);
+        updateHabitsList();
+        updateCalendar();
+    }
+
+    // Load mood data
+    const savedMoodData = localStorage.getItem('moodData');
+    if (savedMoodData) {
+        moodData = JSON.parse(savedMoodData);
+    }
+}
+
+// Update saveMood button event listener
+document.getElementById('saveMood').addEventListener('click', () => {
+    const selectedMood = document.querySelector('.mood-btn.active');
+    const notes = document.getElementById('moodNotes').value;
+    
+    if (selectedMood) {
+        saveMoodEntry(selectedMood.dataset.mood, notes);
+        document.getElementById('moodNotes').value = '';
+        document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('active'));
+    } else {
+        showNotification('Please select a mood first!', 'error');
+    }
 }); 
