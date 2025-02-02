@@ -60,31 +60,76 @@ body {
 }
 
 .nav-brand {
-    font-size: 2rem;
-    font-weight: bold;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 1px;
-    animation: gradientShift 3s ease-in-out infinite;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    padding: 0.5rem 1rem;
+    font-size: 2.2rem;
+    font-weight: 800;
     cursor: pointer;
+    letter-spacing: -0.5px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 0.2rem;
 }
 
-@keyframes gradientShift {
-    0% { filter: hue-rotate(0deg); }
-    50% { filter: hue-rotate(10deg); }
-    100% { filter: hue-rotate(0deg); }
+.logo-main {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    color: #2D3436;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2D3436 0%, #4A4A4A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-heart {
+    color: var(--color-primary);
+    font-size: 1rem;
+    animation: heartBeat 1.5s ease-in-out infinite;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #ff5c9e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(255, 112, 171, 0.2));
+    margin-top: -0.2rem;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(1.1); }
+    20% { transform: scale(0.9); }
+    50% { transform: scale(1); }
+}
+
+.logo-plus {
+    color: var(--color-primary);
+    margin-left: 2px;
+    font-size: 2.4rem;
+    font-weight: 900;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #ff5c9e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .nav-brand:hover {
-    transform: translateY(-2px) scale(1.05);
+    transform: translateY(-2px);
+}
+
+.nav-brand:hover .logo-heart {
+    animation: heartPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes heartPop {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.4) rotate(10deg); }
 }
 
 .nav-brand:active {
-    transform: translateY(1px) scale(0.98);
+    transform: translateY(1px);
 }
 
 .nav-brand::after {
@@ -1330,39 +1375,47 @@ body {
 
 .calendar-date {
     background: rgba(255, 255, 255, 0.95);
-    padding: 1rem;
-    text-align: center;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     font-weight: 500;
     border-radius: 12px;
     border: 1px solid rgba(255, 182, 211, 0.2);
+    min-height: 60px;
+}
+
+.calendar-date span {
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+.calendar-date i {
+    font-size: 1rem;
+    color: var(--color-primary);
+}
+
+.calendar-date.completed {
+    background: linear-gradient(135deg, #98FB98 0%, #7CCD7C 100%);
+}
+
+.calendar-date.completed span,
+.calendar-date.completed i {
+    color: white;
 }
 
 .calendar-date:hover {
     transform: translateY(-3px) scale(0.95);
     background: var(--gradient-primary);
-    color: white;
     box-shadow: 0 5px 15px rgba(255, 112, 171, 0.2);
 }
 
-.calendar-date.active {
-    background: var(--gradient-primary);
-    transform: scale(0.95);
-    box-shadow: 0 8px 20px rgba(255, 112, 171, 0.3);
-    animation: datePulse 2s infinite;
-}
-
-@keyframes datePulse {
-    0%, 100% { transform: scale(0.95); }
-    50% { transform: scale(0.9); }
-}
-
-.calendar-date.completed {
-    background: linear-gradient(135deg, #98FB98 0%, #7CCD7C 100%);
+.calendar-date:hover span,
+.calendar-date:hover i {
     color: white;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(152, 251, 152, 0.2);
 }
 
 .habit-stats {
@@ -1836,4 +1889,177 @@ body {
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
+}
+
+/* Add Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&display=swap');
+
+/* Chibi Guide Styles */
+.chibi-guide {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    pointer-events: none;
+}
+
+.chibi-character {
+    width: 60px;
+    height: 120px;
+    position: relative;
+    pointer-events: auto;
+    cursor: pointer;
+    transform-origin: bottom;
+    animation: chibiStand 3s ease-in-out infinite;
+}
+
+.chibi-head {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.chibi-face {
+    width: 100%;
+    height: 100%;
+    background: #FFE0E9;
+    border: 2px solid #FF70AB;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.chibi-hair {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    height: 25px;
+    background: #2D3436;
+    border-radius: 20px 20px 0 0;
+}
+
+.chibi-eyes {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 8px;
+}
+
+.chibi-eyes::before,
+.chibi-eyes::after {
+    content: '';
+    width: 4px;
+    height: 6px;
+    background: #2D3436;
+    border-radius: 50%;
+    position: relative;
+    animation: chibiBlink 3s ease-in-out infinite;
+}
+
+.chibi-smile {
+    width: 8px;
+    height: 4px;
+    border-bottom: 2px solid #2D3436;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.chibi-body {
+    width: 30px;
+    height: 45px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 2px solid #FF70AB;
+    border-radius: 10px;
+}
+
+@keyframes chibiStand {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+@keyframes chibiBlink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+.section:hover .chibi-character {
+    animation: chibiExcited 0.5s ease-in-out;
+}
+
+@keyframes chibiExcited {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-5deg); }
+    75% { transform: translateY(-8px) rotate(5deg); }
+}
+
+/* Add different messages for different sections */
+[data-section="home"] .chibi-speech-bubble p { content: "Welcome! Let me show you around! 💝"; }
+[data-section="symptom-checker"] .chibi-speech-bubble p { content: "Tell me how you're feeling! 🏥"; }
+[data-section="bmi-calculator"] .chibi-speech-bubble p { content: "Let's check your BMI! 📊"; }
+[data-section="lifestyle-diseases"] .chibi-speech-bubble p { content: "Stay healthy with these tips! 💪"; }
+[data-section="habit-tracker"] .chibi-speech-bubble p { content: "Track your healthy habits! ✨"; }
+[data-section="first-aid-guide"] .chibi-speech-bubble p { content: "Safety first! Let me help! 🚑"; }
+
+.chibi-speech-bubble {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: 2px solid #FF70AB;
+    position: relative;
+    max-width: 180px;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 112, 171, 0.1);
+}
+
+.chibi-speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    right: -8px;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-right: 2px solid #FF70AB;
+    border-bottom: 2px solid #FF70AB;
+    transform: rotate(-45deg);
+}
+
+.chibi-speech-bubble p {
+    margin: 0;
+    color: #2D3436;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.chibi-guide:hover .chibi-speech-bubble {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .chibi-guide {
+        bottom: 80px;
+        right: 20px;
+        transform: scale(0.8);
+        transform-origin: bottom right;
+    }
+}
+
+/* Hide chibi guide by default */
+.chibi-guide {
+    display: none;
 } 

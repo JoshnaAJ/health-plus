@@ -20,7 +20,7 @@ function navigateTo(sectionId) {
             link.classList.remove('active');
         }
     });
-
+    
     // Scroll to top when navigating
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -632,12 +632,28 @@ function updateCalendar() {
 function createDateCell(day, date) {
     const cell = document.createElement('div');
     cell.className = 'calendar-date';
-    cell.textContent = day;
-
-    if (!day) return cell;
+    
+    if (!day) {
+        cell.textContent = '';
+        return cell;
+    }
 
     const dateStr = date.toISOString().split('T')[0];
     const today = new Date().toISOString().split('T')[0];
+
+    // Create date number element
+    const dateNumber = document.createElement('span');
+    dateNumber.textContent = day;
+    cell.appendChild(dateNumber);
+
+    // Add mood icon if exists for this date
+    if (moodData[dateStr]) {
+        const moodIcon = document.createElement('i');
+        moodIcon.className = `fas fa-${moodData[dateStr]}`;
+        moodIcon.style.fontSize = '1rem';
+        moodIcon.style.marginLeft = '0.2rem';
+        cell.appendChild(moodIcon);
+    }
 
     // Check for habits completed on this date
     const hasCompletedHabits = habits.some(habit => 
@@ -646,15 +662,6 @@ function createDateCell(day, date) {
 
     if (hasCompletedHabits) {
         cell.classList.add('completed');
-    }
-
-    // Add mood icon if exists for this date
-    if (moodData[dateStr]) {
-        const moodIcon = document.createElement('i');
-        moodIcon.className = `fas fa-${moodData[dateStr]}`;
-        moodIcon.style.fontSize = '1rem';
-        moodIcon.style.marginLeft = '0.5rem';
-        cell.appendChild(moodIcon);
     }
 
     if (dateStr === today) {
@@ -1019,32 +1026,75 @@ calendarStyles.textContent = `
 `;
 document.head.appendChild(calendarStyles);
 
-// Update the existing loadHabits function
-function loadHabits() {
-    const savedHabits = localStorage.getItem('habits');
-    if (savedHabits) {
-        habits = JSON.parse(savedHabits);
-        updateHabitsList();
-        updateCalendar();
-    }
+// Remove Chibi Guide functionality
+const chibiMessages = {
+    'home': "Welcome! Let me show you around! 💝",
+    'symptom-checker': "Tell me how you're feeling! 🏥",
+    'bmi-calculator': "Let's check your BMI! 📊",
+    'lifestyle-diseases': "Stay healthy with these tips! 💪",
+    'habit-tracker': "Track your healthy habits! ✨",
+    'first-aid-guide': "Safety first! Let me help! 🚑",
+    'health-tips': "Here are some helpful tips! 💡"
+};
 
-    // Load mood data
-    const savedMoodData = localStorage.getItem('moodData');
-    if (savedMoodData) {
-        moodData = JSON.parse(savedMoodData);
-    }
+function updateChibiMessage(sectionId) {
+    const speechBubble = document.querySelector('.chibi-speech-bubble p');
+    const chibiGuide = document.querySelector('.chibi-guide');
+    
+    // Update message
+    speechBubble.textContent = chibiMessages[sectionId] || chibiMessages['home'];
+    
+    // Show message temporarily
+    chibiGuide.style.opacity = '1';
+    speechBubble.style.opacity = '1';
+    speechBubble.style.transform = 'translateY(0)';
+    
+    // Hide message after 3 seconds
+    setTimeout(() => {
+        speechBubble.style.opacity = '0';
+        speechBubble.style.transform = 'translateY(10px)';
+    }, 3000);
 }
 
-// Update saveMood button event listener
-document.getElementById('saveMood').addEventListener('click', () => {
-    const selectedMood = document.querySelector('.mood-btn.active');
-    const notes = document.getElementById('moodNotes').value;
+// Remove click interaction for chibi character
+document.addEventListener('DOMContentLoaded', () => {
+    const chibiCharacter = document.querySelector('.chibi-character');
+    const speechBubble = document.querySelector('.chibi-speech-bubble');
     
-    if (selectedMood) {
-        saveMoodEntry(selectedMood.dataset.mood, notes);
-        document.getElementById('moodNotes').value = '';
-        document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('active'));
-    } else {
-        showNotification('Please select a mood first!', 'error');
-    }
+    chibiCharacter.addEventListener('click', () => {
+        speechBubble.style.opacity = '1';
+        speechBubble.style.transform = 'translateY(0)';
+        
+        // Add bounce animation to chibi
+        chibiCharacter.style.animation = 'none';
+        chibiCharacter.offsetHeight; // Trigger reflow
+        chibiCharacter.style.animation = 'float 3s ease-in-out infinite';
+    });
+    
+    // Show initial message
+    updateChibiMessage('home');
+});
+
+// Remove chibi guide visibility functions
+function updateChibiVisibility() {
+    const chibiGuide = document.querySelector('.chibi-guide');
+    chibiGuide.style.display = 'none'; // Hide by default
+}
+
+// Remove show chibi on nav hover
+document.querySelector('.nav-links').addEventListener('mouseenter', () => {
+    const chibiGuide = document.querySelector('.chibi-guide');
+    chibiGuide.style.display = 'flex';
+    updateChibiMessage(document.querySelector('.section.active').id);
+});
+
+document.querySelector('.nav-links').addEventListener('mouseleave', () => {
+    const chibiGuide = document.querySelector('.chibi-guide');
+    chibiGuide.style.display = 'none';
+});
+
+// Remove initialize chibi visibility
+document.addEventListener('DOMContentLoaded', () => {
+    updateChibiVisibility();
+    // ... existing initialization code ...
 }); 
