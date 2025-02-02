@@ -143,17 +143,17 @@ cd healthplus
 - [Tutorial Videos]
 
 ## Team Contributions
-- **[Name 1]**: 
+- **Eveena KW**: 
   - Frontend development
   - UI/UX design
   - Habit tracking system
 
-- **[Name 2]**: 
+- **Joshna AJ**: 
   - AI integration
   - Symptom checker
   - Documentation
 
-- **[Name 3]**: 
+- **Eminta Christo**: 
   - Data management
   - Testing
   - Feature implementation
