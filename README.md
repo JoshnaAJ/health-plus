@@ -71,18 +71,15 @@ cd healthplus
 ## Project Documentation
 
 ### Screenshots
-![Homepage](screenshots/homepage.png)
+![image](https://github.com/user-attachments/assets/8c5c9190-6d04-4ecc-9f2c-bd43038bda2e)
 *Homepage showing the main dashboard with health tracking features*
 
-![Habit Tracker](screenshots/habit-tracker.png)
+![image](https://github.com/user-attachments/assets/e2c60198-7155-4499-81f7-130c233615ec)
 *Interactive calendar-based habit tracking system with mood indicators*
 
-![Symptom Checker](screenshots/symptom-checker.png)
+![image](https://github.com/user-attachments/assets/1e45602c-cbb8-4462-a0ce-dab7c8793901)
 *AI-powered symptom checker interface with chat functionality*
 
-### Diagrams
-![Architecture](diagrams/architecture.png)
-*System architecture showing the interaction between different components*
 
 ### Features
 
