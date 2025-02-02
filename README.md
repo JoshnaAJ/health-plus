@@ -80,6 +80,7 @@ cd healthplus
 ![image](https://github.com/user-attachments/assets/1e45602c-cbb8-4462-a0ce-dab7c8793901)
 *AI-powered symptom checker interface with chat functionality*
 
+![6e08386c-bf42-4c77-a9df-8afdc34582f4](https://github.com/user-attachments/assets/8daa3811-a5af-4ab3-b8c6-74620be50559)
 
 ### Features
 
